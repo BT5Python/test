@@ -1,5 +1,53 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<table border="1" id="tbl"></table>
+
 <script>
-fetch("https://script.google.com/macros/s/AKfycbwOaWryx6rcs_POoEruPfgS4VmoghQvHMsFhAoAAFdBr23jgDVp01o0IaLXSog1DHjn_Q/exec")
-.then(r=>r.text())
-.then(d=>console.log(d));
+
+const URL=""https://script.google.com/macros/s/AKfycbwOaWryx6rcs_POoEruPfgS4VmoghQvHMsFhAoAAFdBr23jgDVp01o0IaLXSog1DHjn_Q/exec"";
+
+fetch(URL)
+.then(r=>r.json())
+.then(data=>{
+
+let html=`
+<tr>
+<th>Foto</th>
+<th>Nama</th>
+<th>Pangkat</th>
+<th>Jabatan</th>
+<th>Kesatuan</th>
+</tr>
+`;
+
+data.forEach(x=>{
+
+html+=`
+<tr>
+<td>
+<img src="${x.foto}" width="80">
+</td>
+
+<td>${x.nama_lengkap}</td>
+
+<td>${x.pangkat_gol}</td>
+
+<td>${x.jabatan}</td>
+
+<td>${x.kesatuan}</td>
+
+</tr>
+`;
+
+});
+
+document.getElementById("tbl").innerHTML=html;
+
+});
+
 </script>
+
+</body>
+</html>
